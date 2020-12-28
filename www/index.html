@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Zalijevalica v1.0</title>
+
+    <!-- Bootstrap core CSS -->
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">Zalijevalica 1.0</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="px-3">
+    <h1>Welcome to a remote plant watering plant system!</h1>
+    <p class="lead">If you are here, you have clearly decided to take care of your plant in a smart way. Well done young Padawan! Make your choice below!</p>
+    <p class="lead"><img src="./img/yoda.jpg" class="rounded mx-auto d-block" alt="..." width="350">  </p>
+    <p class="lead">
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off" onclick="toggleButtonFunction()">
+	  <label id="toggleLabel" class="btn btn-primary" for="btn-check-outlined">Power ON</label><br>
+	</div>
+	  <script>
+	  	function toggleButtonFunction() {
+	  		var x = document.getElementById("toggleLabel");
+	  		if (x.innerHTML === "Power ON") {
+	  			x.innerHTML = "Power OFF";
+	  		} else {
+	  			x.innerHTML = "Power ON";
+	  		}
+	  	}
+	  </script>
+    </p>
+
+    <p class="lead">
+    	<label for="customRange1" class="form-label">Select watering strength (from 0 to 1)</label>
+		<input type="range" class="form-range" oninput="this.nextElementSibling.value = this.value"value="0.1" min="0" max="1" step="0.1" id="customRange1"> <output>0.1</output>
+    <script type="text/javascript">
+    
+    </script>
+   </p>
+   <p class="lead">
+   	<label for="customRange2" class="form-label">Select duration in seconds (from 0 to 20)</label>
+		<input type="range" class="form-range" oninput="this.nextElementSibling.value = this.value" value="5" min="0" max="20" step="0.5" id="customRange2"> <output>5</output>
+    <script type="text/javascript">
+    
+    </script>
+   </p>
+   <p class="lead">
+   	<div class="d-grid gap-2 col-6 mx-auto">
+   	<button id="water" type="button" class="btn btn-success"  onclick="issueRequest()">Water Plant!</button><output>0.1</output>
+   </div>
+   	<script type="text/javascript">
+   		function issueRequest(){
+
+
+   		const http = new XMLHttpRequest()
+   		strength=document.getElementById('customRange1').value
+   		duration=parseInt(document.getElementById('customRange2').value)*1000
+
+   		url="http://192.168.1.4/water/?time="+duration+"&strength="+strength
+
+		http.open("GET", url)
+		http.send()
+
+		http.onload = () => console.log("Plant is watering")
+	}
+    </script>
+   </p>
+   <p class="lead">
+   	<div class="d-grid gap-2 col-6 mx-auto">
+   	<button id="stopButton" type="button" class="btn btn-danger">Stop All!</button>
+   </div>
+   	<script type="text/javascript">
+   		
+   	</script>
+
+
+   </p>
+
+  </main>
+
+  <footer >
+  </footer>
+</div>
+
+
+    
+  </body>
+</html>
